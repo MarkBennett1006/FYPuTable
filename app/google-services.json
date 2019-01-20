@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "987292768261",
+    "firebase_url": "https://fyputable.firebaseio.com",
+    "project_id": "fyputable",
+    "storage_bucket": "fyputable.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987292768261:android:c596326b842129be",
+        "android_client_info": {
+          "package_name": "com.example.mark.fyputable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987292768261-shn96n4ktn5io3ek61khcdd52kfuc88u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mark.fyputable",
+            "certificate_hash": "8819acd44881cf5b919471aa02c6419d98fad6d1"
+          }
+        },
+        {
+          "client_id": "987292768261-blne9ogqvdnvtok5cop1t41j7lilac0d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVjACIhdEny_D5zU_pJOwQxeC28mHRbNQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987292768261-blne9ogqvdnvtok5cop1t41j7lilac0d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
