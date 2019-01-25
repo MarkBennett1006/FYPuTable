@@ -1,9 +1,12 @@
 package com.example.mark.fyputable;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,7 +42,16 @@ public class Main3Activity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         ModuleRegList = new ArrayList<>();
 
+        Button btnTimetable = (Button) findViewById(R.id.btnTimetable);
         dataLoad();
+
+        btnTimetable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Main2Activity.class));
+            }
+        });
+
     }
 
     public void dataLoad(){

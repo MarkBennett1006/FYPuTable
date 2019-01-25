@@ -1,5 +1,6 @@
 package com.example.mark.fyputable;
 
+import android.app.Activity;
 import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -89,7 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
                         if(task.isSuccessful()){
 
-                            startActivity(new Intent(getApplicationContext(), Main2Activity.class));
+                          //  startActivity(new Intent(getApplicationContext(), Main2Activity.class));
+                            startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+
                         }
 
 
