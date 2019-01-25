@@ -50,7 +50,7 @@ public class Main2Activity extends AppCompatActivity {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
     Calendar cal = Calendar.getInstance();
     Calendar cal2 = Calendar.getInstance();
-   // String dtToday = day.format(cal.getTime());
+  
     String dtToday;
 
 
