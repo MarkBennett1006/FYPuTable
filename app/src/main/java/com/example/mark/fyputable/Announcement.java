@@ -3,18 +3,25 @@ package com.example.mark.fyputable;
 public class Announcement {
 
     private String Title;
-    private Long AnnouncementID;
-    private String ModuleID;
-    private String Content;
+    private String announcementID;
+    private String moduleCode;
+    private String msgContent;
+    private String Date;
+    private String authName;
+    private String authID;
 
     public Announcement() {
+
     }
 
-    public Announcement(String title, Long announcementID, String moduleID, String content) {
+    public Announcement(String title, String announcementID, String moduleCode, String msgContent, String date, String authName, String authID) {
         Title = title;
-        AnnouncementID = announcementID;
-        ModuleID = moduleID;
-        Content = content;
+        this.announcementID = announcementID;
+        this.moduleCode = moduleCode;
+        this.msgContent = msgContent;
+        Date = date;
+        this.authName = authName;
+        this.authID = authID;
     }
 
     public String getTitle() {
@@ -25,27 +32,51 @@ public class Announcement {
         Title = title;
     }
 
-    public Long getAnnouncementID() {
-        return AnnouncementID;
+    public String getAnnouncementID() {
+        return announcementID;
     }
 
-    public void setAnnouncementID(Long announcementID) {
-        AnnouncementID = announcementID;
+    public void setAnnouncementID(String announcementID) {
+        this.announcementID = announcementID;
     }
 
-    public String getModuleID() {
-        return ModuleID;
+    public String getModuleCode() {
+        return moduleCode;
     }
 
-    public void setModuleID(String moduleID) {
-        ModuleID = moduleID;
+    public void setModuleCode(String moduleCode) {
+        this.moduleCode = moduleCode;
     }
 
-    public String getContent() {
-        return Content;
+    public String getMsgContent() {
+        return msgContent;
     }
 
-    public void setContent(String content) {
-        Content = content;
+    public void setMsgContent(String msgContent) {
+        this.msgContent = msgContent;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+
+    public String getAuthName() {
+        return authName;
+    }
+
+    public void setAuthName(String authName) {
+        this.authName = authName;
+    }
+
+    public String getAuthID() {
+        return authID;
+    }
+
+    public void setAuthID(String authID) {
+        this.authID = authID;
     }
 }

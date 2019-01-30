@@ -22,7 +22,8 @@
             android:name=".CalendarActivity"
             android:label="@string/title_activity_calendar"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ttRecyclerActivity"></activity>
+        <activity android:name=".ttRecyclerActivity" />
+        <activity android:name=".EntryActivity"></activity>
     </application>
 
 </manifest>

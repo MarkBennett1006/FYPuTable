@@ -38,6 +38,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.6'
     implementation 'com.firebaseui:firebase-ui-firestore:4.3.1'
     implementation 'com.google.firebase:firebase-firestore:17.0.1'
+    implementation 'com.squareup:android-times-square:1.6.5@aar'
 }
 
 com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class Main3Activity extends AppCompatActivity {
 
-    ListView lstAnnouncement;
+ /*   ListView lstAnnouncement;
     FirebaseUser user;
     FirebaseDatabase database;
     ArrayAdapter<String> adapter;
@@ -125,6 +125,6 @@ public class Main3Activity extends AppCompatActivity {
 
         }
     };
-
+*/
 }
 
