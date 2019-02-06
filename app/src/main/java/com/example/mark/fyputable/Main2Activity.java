@@ -77,6 +77,7 @@ public class Main2Activity extends AppCompatActivity {
         Button btnNext = (Button) findViewById(R.id.btnAnnouncement);
         Button btnNxtDay = (Button) findViewById(R.id.btnNxtDay);
         Button btnLstDay = (Button) findViewById(R.id.btnLstDay);
+
         TextView txtText = (TextView) findViewById(R.id.txtDay) ;
         lstView = (ListView) findViewById(R.id.lstUserData);
         adapter = new ArrayAdapter<>(Main2Activity.this, R.layout.messageinfo, R.id.textView, itemlist);

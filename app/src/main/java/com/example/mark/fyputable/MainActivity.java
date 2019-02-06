@@ -5,16 +5,32 @@ import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationProvider;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.PlaceBufferResponse;
+import com.google.android.gms.maps.*;
+import com.google.android.gms.location.places.GeoDataClient;
+import com.google.android.gms.location.places.PlaceDetectionClient;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.Place;
+//import com.google.android.libraries.places.*;
+
+
+import com.google.android.gms.location.places.PlacesOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,7 +40,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
+import io.opencensus.tags.Tag;
 
 
 // Reference 1: https://www.youtube.com/watch?v=tJVBXCNtUuk
@@ -43,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
     EditText txtEmail,txtPass; //Textboxes for entering email and password
     Button Login;  //Login button
     FirebaseAuth firebaseAuth; //Need to declare Firebase Auth
+    String TAG;
+
+
 
 
     @Override
@@ -61,6 +80,39 @@ public class MainActivity extends AppCompatActivity {
                 OpenActivity();
             }
         }); //Call the method to be executed when Login button is clicked.
+
+        TAG = MainActivity.class.getSimpleName();
+
+        PlaceDetectionClient detect = Places.getPlaceDetectionClient(this,null);
+
+        GeoDataClient geo = Places.getGeoDataClient(this, null);
+
+        FusedLocationProviderClient fuse = LocationServices.getFusedLocationProviderClient(this);
+
+
+
+
+      geo.getPlaceById("ChIJBdhPXiSQREgRv6gLTX5whFo").addOnSuccessListener(new OnSuccessListener<PlaceBufferResponse>() {
+          @Override
+          public void onSuccess(PlaceBufferResponse places) {
+              Place placey = places.get(0);
+
+              Log.d(TAG, "Name is " + placey.getName());
+
+          }
+      })
+              .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "Places thing aint work");
+            }
+        });
+
+
+
+
+
+
 
 
 
