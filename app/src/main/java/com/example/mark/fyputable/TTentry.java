@@ -1,6 +1,6 @@
 package com.example.mark.fyputable;
 
-public class TTentry implements Comparable {
+public class TTentry {
    private Long EntryID;
     private String Location;
     private String ModuleID;
@@ -71,21 +71,5 @@ public class TTentry implements Comparable {
     }
 
 
-    @Override
 
-    public int compareTo(Object o) {
-
-        return 0;
-    }
-
-    public int compareTo(TTentry entry) {
-        String TimeParseObj[] = this.Time.split(":");
-        int HourObj = Integer.parseInt(TimeParseObj[0]);
-
-        String TimeParseClass[] = ((TTentry) entry).getTime().split(":");
-        int HourClass = Integer.parseInt(TimeParseClass[0]);
-
-        return HourObj - HourClass;
-
-    };
 }

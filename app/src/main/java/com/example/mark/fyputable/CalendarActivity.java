@@ -22,7 +22,25 @@ public class CalendarActivity extends AppCompatActivity {
 
 
     /*
-   ref Calendar https://codinginflow.com/tutorials/android/timesquare-calendarpickerview
+   Ref 1 CalendarPickerView https://codinginflow.com/tutorials/android/timesquare-calendarpickerview
+   Ref 2 Java Parse Exception https://examples.javacodegeeks.com/core-java/text/parseexception/java-text-parseexception-how-to-solve-parseexception/
+
+
+ --------Copy of Licence for the TimeSquare CalendarPickerView-------
+   Copyright 2012 Square, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
 
      */
 
@@ -37,19 +55,12 @@ public class CalendarActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        }); */
 
         Date firstDayOfSemester = new Date();
         Date lastDayOfSemester = new Date();
         Date today = new Date();
 
+        //Ref 2
         try {
         lastDayOfSemester = dmy.parse("05/04/2019");
         firstDayOfSemester = dmy.parse("01/01/2019");
@@ -58,13 +69,13 @@ public class CalendarActivity extends AppCompatActivity {
             e.printStackTrace();
         };
 
+        //Ref 1
         calPicker = findViewById(R.id.calendar);
         calPicker.init(firstDayOfSemester, lastDayOfSemester)
-              //  .inMode(CalendarPickerView.SelectionMode.RANGE)
                 .withSelectedDate(today);
 
 
-
+        //Ref 1
         calPicker.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
             @Override
             public void onDateSelected(Date date) {
@@ -82,10 +93,6 @@ public class CalendarActivity extends AppCompatActivity {
 
                 startActivity(intent);
 
-
-
-
-         //       Toast.makeText(CalendarActivity.this, selectedDate, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -95,19 +102,6 @@ public class CalendarActivity extends AppCompatActivity {
         });
 
 
-     /*  CalendarView mCalendarView = (CalendarView) findViewById(R.id.calendarView);
-
-        mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                String date = year + "/" + month +1 + "/" + dayOfMonth;
-
-                Intent intent = new Intent(CalendarActivity.this, ttRecyclerActivity.class);
-                intent.putExtra("dateExtra", selectedDate);
-
-                startActivity(intent);
-            }
-        }); */
 
 
 

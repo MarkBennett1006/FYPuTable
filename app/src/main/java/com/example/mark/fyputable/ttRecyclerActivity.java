@@ -45,6 +45,8 @@ Ref 1 Compound Query: https://www.youtube.com/watch?v=VBEzqahgKmw&list=PLrnPJCHv
 Ref 2 Recycler View + FS : https://www.youtube.com/watch?v=lAGI6jGS4vs&list=PLrnPJCHvNZuAXdWxOzsN5rgG2M4uJ8bH1&index=3
 Ref 3 Date Incrementer : https://stackoverflow.com/questions/20582632/how-to-get-the-next-date-when-click-on-button-in-android
 Ref 4 Receiving and Intent: https://stackoverflow.com/questions/2091465/how-do-i-pass-data-between-activities-in-android-application
+Reference 5: OnClick for RecyclerView: https://youtu.be/3WR4QAiVuCw?t=467
+Ref 5 Swipe Listener: https://stackoverflow.com/questions/4139288/android-how-to-handle-right-to-left-swipe-gestures
 
  */
 public class ttRecyclerActivity extends AppCompatActivity {
@@ -128,9 +130,9 @@ public class ttRecyclerActivity extends AppCompatActivity {
 
 
 
-
+        //Ref 5
         onSwipeTouchListener = new OnSwipeTouchListener(ttRecyclerActivity.this) {
-
+            //Ref 3
             public void onSwipeRight() {
 
                 cal.add(Calendar.DAY_OF_MONTH, -1);
@@ -140,6 +142,7 @@ public class ttRecyclerActivity extends AppCompatActivity {
                 setUpRecycler(date);
 
             }
+            //Ref 3
             public void onSwipeLeft() {
 
                 cal.add(Calendar.DAY_OF_MONTH, 1);
@@ -155,7 +158,7 @@ public class ttRecyclerActivity extends AppCompatActivity {
         dateView.setOnTouchListener(onSwipeTouchListener);
 
 
-
+        //Ref 3
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,7 +171,7 @@ public class ttRecyclerActivity extends AppCompatActivity {
             }
         });
 
-
+        //Ref 3
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,12 +186,8 @@ public class ttRecyclerActivity extends AppCompatActivity {
 
     }
 
-
-
+    //Reference 1
     public void setUpRecycler(String passDate){
-
-
-
         Query query = entryDocRef.collection("TT_Entries")
                 .whereEqualTo("Date", passDate)
                 .orderBy("startTime", Query.Direction.ASCENDING)

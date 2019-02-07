@@ -44,6 +44,7 @@ import io.opencensus.tags.Tag;
 
 
 // Reference 1: https://www.youtube.com/watch?v=tJVBXCNtUuk
+//Reference 2:
 
 
 
@@ -83,14 +84,17 @@ public class MainActivity extends AppCompatActivity {
 
         TAG = MainActivity.class.getSimpleName();
 
+
+
+
+        //Reference 2
+        //I have no idea why this needs to be here but EntryActivity stopped working when I deleted it
+
         PlaceDetectionClient detect = Places.getPlaceDetectionClient(this,null);
 
         GeoDataClient geo = Places.getGeoDataClient(this, null);
 
         FusedLocationProviderClient fuse = LocationServices.getFusedLocationProviderClient(this);
-
-
-
 
       geo.getPlaceById("ChIJBdhPXiSQREgRv6gLTX5whFo").addOnSuccessListener(new OnSuccessListener<PlaceBufferResponse>() {
           @Override
@@ -104,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
               .addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "Places thing aint work");
+                Log.d(TAG, "Place fetch failed");
             }
         });
 
