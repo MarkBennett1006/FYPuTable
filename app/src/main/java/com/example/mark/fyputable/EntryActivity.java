@@ -55,7 +55,9 @@ import javax.annotation.Nullable;
 
 /*
 
-Reference 1: Declaring Maps Objects:
+Reference 1: Declaring Maps Objects: https://google-developer-training.gitbooks.io/android-developer-advanced-course-practicals/content/unit-4-add-geo-features-to-your-apps/lesson-8-places/8-1-p-places-api/8-1-p-places-api.html
+Where I got Reference 1 from: https://www.youtube.com/watch?v=RQxY7rrZATU&list=PLgCYzUzKIBE-SZUrVOsbYMzH7tPigT3gi
+
 Reference 2: Several methods for populating MapView: https://github.com/googlemaps/android-samples/blob/master/ApiDemos/java/app/src/main/java/com/example/mapdemo/RawMapViewDemoActivity.java
 Reference 3: Set focus for map: https://stackoverflow.com/questions/18932325/android-how-to-focus-on-current-position
 Reference 4: Pulling Location Data from firebase:https://www.youtube.com/watch?v=X5AGMpMV7Ks&t=376s
@@ -63,6 +65,7 @@ Reference 5: Populating Textviews from Firebase: https://www.youtube.com/watch?v
 Reference 6: Getting Weather Data: https://www.youtube.com/watch?v=8-7Ip6xum6E&list=LLFAzQ3TDMkLzWEEv3gyfvFQ&index=11&t=0s
 Reference 7: Extracting Latitute/Longitude co-ordinates from lat/lng variable: https://stackoverflow.com/questions/24256478/pattern-to-extract-text-between-parenthesis
 Reference 8: Opening Maps App: https://developers.google.com/maps/documentation/urls/android-intents
+Reference 9: Receiving and Intent: https://stackoverflow.com/questions/2091465/how-do-i-pass-data-between-activities-in-android-application
 
 
 
@@ -116,7 +119,7 @@ public class EntryActivity extends AppCompatActivity implements OnMapReadyCallba
         TAG = EntryActivity.class.getSimpleName();
 
 
-
+        //Ref 9
         Intent incomingIntent = getIntent();
         String incomingPath = incomingIntent.getStringExtra("entryPath");
         String incomingPlaceID = incomingIntent.getStringExtra("entryPlaceID");
@@ -210,7 +213,7 @@ public class EntryActivity extends AppCompatActivity implements OnMapReadyCallba
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d(TAG, "Places thing aint work");
+                        Log.d(TAG, "PlaceID fetch failed");
                     }
                 });
 

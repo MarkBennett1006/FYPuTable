@@ -49,7 +49,7 @@ dependencies {
     //https://codinginflow.com/tutorials/android/timesquare-calendarpickerview
     implementation 'com.squareup:android-times-square:1.6.5@aar'
 
-  //Ref: https://developers.google.com/android/guides/releases
+    //Ref: https://developers.google.com/android/guides/releases
     implementation 'com.google.android.gms:play-services-places:16.0.0'
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'

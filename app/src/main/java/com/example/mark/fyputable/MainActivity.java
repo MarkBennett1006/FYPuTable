@@ -44,7 +44,7 @@ import io.opencensus.tags.Tag;
 
 
 // Reference 1: https://www.youtube.com/watch?v=tJVBXCNtUuk
-//Reference 2:
+//Reference 2: https://google-developer-training.gitbooks.io/android-developer-advanced-course-practicals/content/unit-4-add-geo-features-to-your-apps/lesson-8-places/8-1-p-places-api/8-1-p-places-api.html
 
 
 
@@ -147,7 +147,8 @@ public class MainActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
 
                           //  startActivity(new Intent(getApplicationContext(), Main2Activity.class));
-                            startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+                          //  startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+                            startActivity(new Intent(getApplicationContext(), CreateLectureActivity.class));
 
                         }
 
