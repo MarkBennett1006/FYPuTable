@@ -51,7 +51,10 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".CreateLectureActivity"></activity>
+        <activity android:name=".CreateLectureActivity" />
+        <activity android:name=".CreateModuleActivity" />
+        <activity android:name=".StaffAdminActivity" />
+        <activity android:name=".CreateUserActivity"></activity>
     </application>
 
 </manifest>

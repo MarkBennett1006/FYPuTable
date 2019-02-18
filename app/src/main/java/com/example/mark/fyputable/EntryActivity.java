@@ -5,10 +5,15 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
+import android.widget.ViewSwitcher;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -39,7 +44,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.redmadrobot.inputmask.MaskedTextChangedListener;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,6 +55,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Nullable;
 
@@ -66,6 +75,10 @@ Reference 6: Getting Weather Data: https://www.youtube.com/watch?v=8-7Ip6xum6E&l
 Reference 7: Extracting Latitute/Longitude co-ordinates from lat/lng variable: https://stackoverflow.com/questions/24256478/pattern-to-extract-text-between-parenthesis
 Reference 8: Opening Maps App: https://developers.google.com/maps/documentation/urls/android-intents
 Reference 9: Receiving and Intent: https://stackoverflow.com/questions/2091465/how-do-i-pass-data-between-activities-in-android-application
+Reference 10: View Flipper:https://www.youtube.com/watch?v=2c-GbJ-c_eA
+Reference 11: LinearLayout OnClick: https://stackoverflow.com/questions/15596507/how-to-set-onclick-method-with-linearlayout
+Reference 12: Masking: https://github.com/RedMadRobot/input-mask-android/wiki/Quick-Start
+Reference 13: Updating A Firestore Entry: https://www.youtube.com/watch?v=TBr_5QH1EvQ
 
 
 
@@ -98,20 +111,35 @@ public class EntryActivity extends AppCompatActivity implements OnMapReadyCallba
     SimpleDateFormat HH = new SimpleDateFormat("HH:mm:ss");
     String URL;
     Button btnMaps;
+    ViewSwitcher viewSwitcher;
+    TextView testText;
+    EditText editTest;
+    LinearLayout EntryLinearLayout;
+    ViewFlipper Flip;
+    TextView EditName;
+    EditText EditDate;
+    EditText EditStart;
+    EditText EditEnd;
+    EditText EditBuilding;
+    EditText EditRoom;
+    Entry GlobalEnt;
+    Button btnPushUpdate;
+
+
 
     Calendar cal = Calendar.getInstance();
 
-
+//Ref 1
     GeoDataClient geo;
-
     FusedLocationProviderClient fuse;
-
     Bundle mapViewBundle = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
+
+
 
 
 
@@ -137,6 +165,31 @@ public class EntryActivity extends AppCompatActivity implements OnMapReadyCallba
         txtWeather = (TextView)findViewById(R.id.entWeather);
         btnMaps = (Button) findViewById(R.id.btnOpenMaps);
 
+
+        //Ref 10
+        Flip = (ViewFlipper) findViewById(R.id.EntryFlip);
+        EntryLinearLayout = (LinearLayout) findViewById(R.id.ClickableEntryLayout);
+
+        //Ref 11
+        EntryLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Ref 10
+                Flip.showNext();
+                EditingSetup();
+
+            }
+        });
+
+        btnPushUpdate = (Button) findViewById(R.id.btnPushUpdate);
+        btnPushUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PushUpdate();
+            }
+        });
+
         venueMap = (MapView)  findViewById(R.id.entMap);
 
 
@@ -144,29 +197,29 @@ public class EntryActivity extends AppCompatActivity implements OnMapReadyCallba
         currentEntryRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                Entry ent = documentSnapshot.toObject(Entry.class);
+                GlobalEnt = documentSnapshot.toObject(Entry.class);
 
 
 
-                txtName.setText(ent.getModuleCode() + " - " + ent.getModuleName());
-                txtDate.setText(ent.getDate());
-                txtTimes.setText(ent.getStartTime() + " - " + ent.getEndTime());
-                txtBuilding.setText(ent.getBuilding() + " " + ent.getRoom());
+                txtName.setText(GlobalEnt.getModuleCode() + " - " + GlobalEnt.getModuleName());
+                txtDate.setText(GlobalEnt.getDate());
+                txtTimes.setText(GlobalEnt.getStartTime() + " - " + GlobalEnt.getEndTime());
+                txtBuilding.setText(GlobalEnt.getBuilding() + " " + GlobalEnt.getRoom());
 
-                strBuilding = ent.getBuilding();
+                strBuilding = GlobalEnt.getBuilding();
 
 
-                if (ent.getClassType().equals("L")) {
+                if (GlobalEnt.getClassType().equals("L")) {
                     txtType.setText("Lecture");
                 }
-                else if (ent.getClassType().equals("T")){
+                else if (GlobalEnt.getClassType().equals("T")){
                     txtType.setText("Tutorial");
                 }
 
                 //     getIDForBuilding(strBuilding);
 
-                String DateParam = ent.getDate();
-                setTimeForWeatherAPI(ent.getStartTime());
+                String DateParam = GlobalEnt.getDate();
+                setTimeForWeatherAPI(GlobalEnt.getStartTime());
                 setDateForWeatherAPI(DateParam);
 
 
@@ -369,6 +422,142 @@ public class EntryActivity extends AppCompatActivity implements OnMapReadyCallba
         });
 
         return strBuildID;
+
+    }
+
+
+    public void EditingSetup(){
+
+        EditName = (TextView) findViewById(R.id.editModuleName);
+        EditName.setText(GlobalEnt.getModuleCode());
+
+        EditDate = (EditText) findViewById(R.id.editDate);
+        EditDate.setText(GlobalEnt.getDate());
+
+        EditStart = (EditText) findViewById(R.id.editStartTime);
+        EditStart.setText(GlobalEnt.getStartTime());
+
+        EditEnd = (EditText) findViewById(R.id.editEndTime);
+        EditEnd.setText(GlobalEnt.getEndTime());
+
+        EditBuilding = (EditText) findViewById(R.id.editBuilding);
+        EditBuilding.setText(GlobalEnt.getBuilding());
+
+        EditRoom = (EditText) findViewById(R.id.editRoom);
+        EditRoom.setText(GlobalEnt.getRoom());
+
+
+        final MaskedTextChangedListener listener = MaskedTextChangedListener.Companion.installOn(
+                EditStart,
+                "[00]{:}[00]",
+                new MaskedTextChangedListener.ValueListener() {
+                    @Override
+                    public void onTextChanged(boolean b, @NotNull String s) {
+
+                    }
+                    public void onTextChanged(boolean maskFilled, @NonNull final String extractedValue, @NonNull final String formattedValue) {
+                        Log.d("TAG", extractedValue);
+                        Log.d("TAG", String.valueOf(maskFilled));
+                    }
+                }
+        );
+
+
+        //Reference 12
+        final MaskedTextChangedListener listener2 = MaskedTextChangedListener.Companion.installOn(
+                EditEnd,
+                "[00]{:}[00]",
+                new MaskedTextChangedListener.ValueListener() {
+                    @Override
+                    public void onTextChanged(boolean b, @NotNull String s) {
+
+                    }
+                    public void onTextChanged(boolean maskFilled, @NonNull final String extractedValue, @NonNull final String formattedValue) {
+                        Log.d("TAG", extractedValue);
+                        Log.d("TAG", String.valueOf(maskFilled));
+                    }
+                }
+        );
+
+
+        //Reference 12
+        final MaskedTextChangedListener listener3 = MaskedTextChangedListener.Companion.installOn(
+                EditDate,
+                "[00]{/}[00]{/}[0000]",
+                new MaskedTextChangedListener.ValueListener() {
+                    @Override
+                    public void onTextChanged(boolean b, @NotNull String s) {
+
+                    }
+                    public void onTextChanged(boolean maskFilled, @NonNull final String extractedValue, @NonNull final String formattedValue) {
+                        Log.d("TAG", extractedValue);
+                        Log.d("TAG", String.valueOf(maskFilled));
+                    }
+                }
+        );
+
+        EditStart.setHint(listener.placeholder());
+        EditEnd.setHint(listener2.placeholder());
+        EditDate.setHint(listener3.placeholder());
+
+
+
+
+
+    }
+
+    public void PushUpdate(){
+
+
+
+        String editedDate = EditDate.getEditableText().toString();
+        String editedStart = EditStart.getEditableText().toString();
+        String editedEnd = EditEnd.getEditableText().toString();
+        String editedBuilding = EditBuilding.getEditableText().toString();
+        String editedRoom = EditRoom.getEditableText().toString();
+
+
+        //Reference 13
+        Map<String, Object> entryHash = new HashMap<>();
+        entryHash.put("Date", editedDate);
+        entryHash.put("startTime", editedStart);
+        entryHash.put("endTime", editedEnd);
+        entryHash.put("Building", editedBuilding);
+        entryHash.put("Room", editedRoom);
+
+        currentEntryRef.update(entryHash);
+
+        DisperseUpdate(entryHash);
+
+
+    }
+
+    //Reference 13
+    public void DisperseUpdate(Map<String, Object> entryHash){
+
+      String EntryIDKey = GlobalEnt.getEntryID();
+
+      db.collection("Timetable_Entries").whereEqualTo("entryID",EntryIDKey).get()
+              .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                  @Override
+                  public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                      for (QueryDocumentSnapshot documentSnapshot1 : queryDocumentSnapshots){
+
+                          DocumentReference UpdateableRef = documentSnapshot1.getReference();
+
+                          UpdateableRef.update(entryHash);
+
+
+
+
+                      }
+
+
+                  }
+              });
+
+
+
 
     }
 

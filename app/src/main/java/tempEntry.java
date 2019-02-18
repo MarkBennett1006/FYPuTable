@@ -1,7 +1,4 @@
-package com.example.mark.fyputable;
-
-public class Entry {
-
+public class tempEntry {
     private String Building;
     private String moduleCode;
     private String moduleName;
@@ -11,16 +8,15 @@ public class Entry {
     private String classType;
     private String Room;
     private String entryID;
-    private String userID;
 
 
 
 
 
-    public Entry() {
+    public tempEntry() {
     }
 
-    public Entry(String building, String moduleCode, String moduleName, String date, String startTime, String endTime, String classType, String room, String entryID, String userID) {
+    public tempEntry(String building, String moduleCode, String moduleName, String date, String startTime, String endTime, String classType, String room, String entryID) {
         Building = building;
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
@@ -30,7 +26,7 @@ public class Entry {
         this.classType = classType;
         Room = room;
         this.entryID = entryID;
-        this.userID = userID;
+
     }
 
     public String getBuilding() {
@@ -105,11 +101,5 @@ public class Entry {
         this.entryID = entryID;
     }
 
-    public String getUserID() {
-        return userID;
-    }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
 }

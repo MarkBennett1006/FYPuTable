@@ -87,7 +87,7 @@ public class ttRecyclerActivity extends AppCompatActivity {
         settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(false)
                 .build();
-        db.setFirestoreSettings(settings);
+   //     db.setFirestoreSettings(settings);
 
 
 
@@ -188,22 +188,32 @@ public class ttRecyclerActivity extends AppCompatActivity {
 
     //Reference 1
     public void setUpRecycler(String passDate){
-        Query query = entryDocRef.collection("TT_Entries")
+
+
+        Query query = db.collection("Timetable_Entries")
                 .whereEqualTo("Date", passDate)
-                .orderBy("startTime", Query.Direction.ASCENDING)
+                .whereEqualTo("userID", uid)
+                .orderBy("startTime", Query.Direction.ASCENDING);
+
+
+     /*   Query query = entryDocRef.collection("TT_Entries")
+                .whereEqualTo("Date", passDate)
+                .orderBy("startTime", Query.Direction.ASCENDING) */
                 ;
 
 
-        CollectRefForIndex = entryDocRef.collection("TT_Entries");
+    //    CollectRefForIndex = entryDocRef.collection("TT_Entries");
 
-        CollectRefForIndex.whereEqualTo("Date", passDate)
+    //    CollectRefForIndex = db.collection("Timetable_Entries");
+
+   /*     CollectRefForIndex.whereEqualTo("Date", passDate)
         .orderBy("startTime", Query.Direction.ASCENDING)
         .get().addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "");
+                Log.d(TAG, "Kanga");
             }
-        });
+        }); */
 
 
 

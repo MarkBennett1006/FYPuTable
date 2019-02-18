@@ -1,22 +1,26 @@
 package com.example.mark.fyputable;
 
+import java.util.List;
+
 public class Users {
 
-    String userID;
-    String userName;
-    String email;
-    String userType;
-    String[] RegisteredModules;
+    private String userID;
+    private String userName;
+    private String email;
+    private String userType;
+    private String institutionID;
 
-    public Users() {
-    }
 
-    public Users(String userID, String userName, String email, String userType, String[] registeredModules) {
+    public Users(String userID, String userName, String email, String userType, String institutionID) {
         this.userID = userID;
         this.userName = userName;
         this.email = email;
         this.userType = userType;
-        RegisteredModules = registeredModules;
+        this.institutionID = institutionID;
+    }
+
+
+    public Users() {
     }
 
     public String getUserID() {
@@ -51,11 +55,13 @@ public class Users {
         this.userType = userType;
     }
 
-    public String[] getRegisteredModules() {
-        return RegisteredModules;
+    public String getInstitutionID() {
+        return institutionID;
     }
 
-    public void setRegisteredModules(String[] registeredModules) {
-        RegisteredModules = registeredModules;
+    public void setInstitutionID(String institutionID) {
+        this.institutionID = institutionID;
     }
 }
+
+

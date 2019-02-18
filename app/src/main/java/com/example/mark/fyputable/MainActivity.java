@@ -146,9 +146,12 @@ public class MainActivity extends AppCompatActivity {
 
                         if(task.isSuccessful()){
 
+
+
                           //  startActivity(new Intent(getApplicationContext(), Main2Activity.class));
                           //  startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
-                            startActivity(new Intent(getApplicationContext(), CreateLectureActivity.class));
+                          //  startActivity(new Intent(getApplicationContext(), CreateModuleActivity.class));
+                            startActivity(new Intent(getApplicationContext(), StaffAdminActivity.class));
 
                         }
 

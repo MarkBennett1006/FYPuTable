@@ -26,6 +26,19 @@ import java.util.List;
 import java.util.Map;
 
 
+/*
+
+Reference 1: Writing to Firestore: https://www.youtube.com/watch?v=di5qmolrFVs&list=PLrnPJCHvNZuDrSqu-dKdDi3Q6nM-VUyxD&index=3
+Reference 2: Spinner: https://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list
+Reference 3: Spinner On Selected Item: https://stackoverflow.com/questions/1337424/android-spinner-get-the-selected-item-change-event
+
+
+
+
+
+ */
+
+
 public class CreateLectureActivity extends AppCompatActivity {
     private static final String TAG = "CreateLetureActivity";
     EditText createID;
@@ -57,8 +70,8 @@ public class CreateLectureActivity extends AppCompatActivity {
 
         createID = (EditText)findViewById(R.id.crID);
         createID.setHint("LectureID");
-        createStudentID = (EditText)findViewById(R.id.crStudentID);
-        createStudentID.setHint("StudentID");
+    //    createStudentID = (EditText)findViewById(R.id.crStudentID);
+     //   createStudentID.setHint("StudentID");
         createStart = (EditText)findViewById(R.id.crStart);
         createStart.setHint("Start Time");
         createEnd = (EditText)findViewById(R.id.crEnd);
@@ -79,6 +92,8 @@ public class CreateLectureActivity extends AppCompatActivity {
 
 
         ModuleList = new ArrayList<>();
+
+        //Ref1
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, ModuleList);
 
 
@@ -93,7 +108,7 @@ public class CreateLectureActivity extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser(); //Find the current user
         uid = user.getUid(); //Current user's id needs to be turned to variable to it can match with specific node in Firebase Database
-        db.collection("Modules").whereArrayContains("RegisteredStaff", "mFMw0HjmdRP79YaFk5KdhcHq6Po2").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        db.collection("Modules").whereArrayContains("RegisteredStaff", uid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for (QueryDocumentSnapshot documentSnapshot1 : queryDocumentSnapshots){
@@ -116,6 +131,7 @@ public class CreateLectureActivity extends AppCompatActivity {
             }
         });
 
+      //Ref2
       moduleCodeDrop.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
           @Override
           public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -147,6 +163,7 @@ public class CreateLectureActivity extends AppCompatActivity {
     public void create() {
 
 
+
         db.collection("Modules").whereEqualTo("ModuleCode", currentModule).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -163,18 +180,19 @@ public class CreateLectureActivity extends AppCompatActivity {
                         String strType = createType.getText().toString();
                         String strEnd = createEnd.getText().toString();
                         String strEntID = createID.getText().toString();
-//        String strModCode = createModule.getText().toString();
                         String strModCode = moduleCodeDrop.getSelectedItem().toString();
                         String strName = createModName.getText().toString();
                         String strStart = createStart.getText().toString();
                         String strUserID = createStudentID.getText().toString();
 
+
+                        //Ref 1
                         Map<String, Object> entry = new HashMap<>();
                         entry.put("Building",strBuilding);
                         entry.put("Date",strDate);
                         entry.put("Room",strRoom);
                         entry.put("classType",strType);
-                        entry.put("endTme",strEnd);
+                        entry.put("endTime",strEnd);
                         entry.put("entryID",strEntID);
                         entry.put("moduleCode",strModCode);
                         entry.put("moduleName",strName);
@@ -200,7 +218,7 @@ public class CreateLectureActivity extends AppCompatActivity {
 
                     }
 
-                    Toast.makeText(CreateLectureActivity.this, "SUCCESS?", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateLectureActivity.this, "Success", Toast.LENGTH_SHORT).show();
 
 
                 }
