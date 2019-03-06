@@ -1,5 +1,6 @@
 package com.example.mark.fyputable;
 
+import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -79,6 +81,7 @@ Reference 10: View Flipper:https://www.youtube.com/watch?v=2c-GbJ-c_eA
 Reference 11: LinearLayout OnClick: https://stackoverflow.com/questions/15596507/how-to-set-onclick-method-with-linearlayout
 Reference 12: Masking: https://github.com/RedMadRobot/input-mask-android/wiki/Quick-Start
 Reference 13: Updating A Firestore Entry: https://www.youtube.com/watch?v=TBr_5QH1EvQ
+Reference 14: Change imageview programatically: https://stackoverflow.com/questions/16906528/change-image-of-imageview-programmatically-in-android
 
 
 
@@ -124,6 +127,9 @@ public class EntryActivity extends AppCompatActivity implements OnMapReadyCallba
     EditText EditRoom;
     Entry GlobalEnt;
     Button btnPushUpdate;
+    ImageView imgWeather;
+    String Weather;
+
 
 
 
@@ -138,6 +144,8 @@ public class EntryActivity extends AppCompatActivity implements OnMapReadyCallba
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
+
+        MyApplication myapp = ((MyApplication)getApplication());
 
 
 
@@ -161,6 +169,7 @@ public class EntryActivity extends AppCompatActivity implements OnMapReadyCallba
         txtTimes = (TextView) findViewById(R.id.entTimes);
         txtBuilding = (TextView) findViewById(R.id.entBuilding);
         txtDate = (TextView) findViewById(R.id.entDate);
+        imgWeather = findViewById(R.id.imgWeather);
 
         txtWeather = (TextView)findViewById(R.id.entWeather);
         btnMaps = (Button) findViewById(R.id.btnOpenMaps);
@@ -174,6 +183,8 @@ public class EntryActivity extends AppCompatActivity implements OnMapReadyCallba
         EntryLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
 
                 //Ref 10
                 Flip.showNext();
@@ -291,13 +302,27 @@ public class EntryActivity extends AppCompatActivity implements OnMapReadyCallba
                     Double temp = objMain.getDouble("temp");
                     JSONArray array2 = obj1.getJSONArray("weather");
                     JSONObject objWeath = array2.getJSONObject(0);
-                    String Weath = objWeath.getString("main");
+                    Weather = objWeath.getString("main");
                     String sysDate = obj1.getString("dt_txt");
 
                     if (sysDate.equals(dateTimeForAPI)){
 
                         Long Temperature = Math.round(temp);
-                        txtWeather.setText(Weath +", "+Temperature.toString()+"°C"  );
+                        txtWeather.setText(Weather +", "+Temperature.toString()+"°C"  );
+
+
+                        //Ref 14
+                        if (Weather.equals("Rain")){
+                            imgWeather.setBackgroundResource(R.drawable.ic_rain);
+                        }
+
+                        if (Weather.equals("Clear")){
+                            imgWeather.setBackgroundResource(R.drawable.ic_sun);
+                        }
+
+
+
+
                     }
 
                     i++;
@@ -322,6 +347,8 @@ public class EntryActivity extends AppCompatActivity implements OnMapReadyCallba
         );
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(jor);
+
+
 
 
        btnMaps.setOnClickListener(new View.OnClickListener() {
@@ -601,9 +628,15 @@ public class EntryActivity extends AppCompatActivity implements OnMapReadyCallba
     //Reference 2
     @Override
     public void onMapReady(GoogleMap map) {
-        map.addMarker(new MarkerOptions().position(latLng).title(strBuilding));
-        //Ref 3
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+
+        if (latLng != null){
+
+            map.addMarker(new MarkerOptions().position(latLng).title(strBuilding));
+            //Ref 3
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+
+        }
+
     }
 
     //Reference 2

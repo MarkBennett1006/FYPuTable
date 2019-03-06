@@ -12,7 +12,20 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content">
 
-       <Button
+       <ImageButton
+           android:id="@+id/btnLastDay"
+           android:layout_width="wrap_content"
+           android:layout_height="50dp"
+           android:src="@drawable/ic_prev_thick"
+           android:background="#ffffff"
+           android:layout_marginStart="5dp"
+           android:layout_marginTop="5dp"
+           android:layout_marginEnd="5dp"
+           android:layout_marginBottom="5dp"
+           android:text="Prev"
+           android:layout_weight="1"/>
+
+  <!--     <Button
            android:id="@+id/btnLastDay"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -21,7 +34,7 @@
            android:layout_marginEnd="5dp"
            android:layout_marginBottom="5dp"
            android:text="Prev"
-           android:layout_weight="1"></Button>
+           android:layout_weight="1"></Button> -->
     <TextView
         android:id="@+id/current_date"
         android:layout_width="wrap_content"
@@ -32,7 +45,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textAlignment="center"/>
 
-       <Button
+   <!--    <Button
            android:id="@+id/btnNextDay"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -41,13 +54,69 @@
            android:layout_marginEnd="5dp"
            android:layout_marginBottom="5dp"
            android:text="Next"
-           android:layout_weight="1"></Button>
+           android:layout_weight="1"></Button> -->
+
+       <ImageButton
+           android:id="@+id/btnNextDay"
+           android:layout_width="wrap_content"
+           android:layout_height="50dp"
+           android:src="@drawable/ic_next_thick"
+           android:background="#ffffff"
+           android:layout_marginStart="5dp"
+           android:layout_marginTop="5dp"
+           android:layout_marginEnd="5dp"
+           android:layout_marginBottom="5dp"
+           android:text="Prev"
+           android:layout_weight="1"/>
+
+
 
    </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="10">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/NavEntryFeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/recycler_view"
+            android:layout_alignParentBottom="true"
+            android:background="#ffffff"
+
+            app:menu="@menu/bottom"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/FABaddEntry"
+            android:src="@drawable/ic_add_circle_outline_black_24dp"
+            android:backgroundTint="#D6E5FF"
+            android:backgroundTintMode="src_in"
+            android:outlineSpotShadowColor="#D6E5FF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_above="@id/NavEntryFeed"
+            android:layout_alignParentRight="true"
+            app:layout_constraintRight_toRightOf="parent"
+            android:text="X"
+            />
+
+
+
+
+    </RelativeLayout>
+
+
+
+
 </LinearLayout>

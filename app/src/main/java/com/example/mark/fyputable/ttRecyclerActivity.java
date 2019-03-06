@@ -3,13 +3,19 @@ package com.example.mark.fyputable;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.FragmentActivity;
@@ -47,6 +53,9 @@ Ref 3 Date Incrementer : https://stackoverflow.com/questions/20582632/how-to-get
 Ref 4 Receiving and Intent: https://stackoverflow.com/questions/2091465/how-do-i-pass-data-between-activities-in-android-application
 Reference 5: OnClick for RecyclerView: https://youtu.be/3WR4QAiVuCw?t=467
 Ref 5 Swipe Listener: https://stackoverflow.com/questions/4139288/android-how-to-handle-right-to-left-swipe-gestures
+Ref 6 Navigation Bar: https://www.youtube.com/watch?v=tPV8xA7m-iw
+Ref 7: Custom Dialogue: https://www.youtube.com/watch?v=ARezg1D9Zd0&list=PLrnPJCHvNZuBkhcesO6DfdCghl6ZejVPc&index=5
+
 
  */
 public class ttRecyclerActivity extends AppCompatActivity {
@@ -55,23 +64,27 @@ public class ttRecyclerActivity extends AppCompatActivity {
    // CollectionReference moduleRegRef = db.collection("ModuleReg");
    // CollectionReference entryRef = db.collection("TT_Entry");
 
+
     DocumentReference entryDocRef;
     entryAdapter adapter;
     FirebaseUser user;
     String uid;
-    List<ModuleReg> RegistrationList;
+  //  List<ModuleReg> RegistrationList;
     DateFormat dmy = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
     SimpleDateFormat activityTitleDate = new SimpleDateFormat("EEE, MMM d");
     Calendar cal = Calendar.getInstance();
     String date;
     String titleDate;
-    Button btnNext;
-    Button btnPrev;
+    ImageButton btnNext;
+    ImageButton btnPrev;
     OnSwipeTouchListener onSwipeTouchListener;
     CollectionReference CollectRefForIndex;
     private static final String TAG = ttRecyclerActivity.class.getSimpleName();
     String buildID;
+    FloatingActionButton fab;
+    NotificationManagerCompat notificationManagerCompat;
+    BottomNavigationView navbar;
 
 
 
@@ -80,6 +93,8 @@ public class ttRecyclerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tt_recycler);
+
+
 
         date = dmy.format(cal.getTime());
 
@@ -91,13 +106,21 @@ public class ttRecyclerActivity extends AppCompatActivity {
 
 
 
+        //ref 6
+        navbar = findViewById(R.id.NavEntryFeed);
+
+        navbar.setOnNavigationItemSelectedListener(navListener);
+     //   navbar.setSelectedItemId(R.id.NavCalendar);
+
+
+
 
 
 
 
         user = FirebaseAuth.getInstance().getCurrentUser(); //Find the current user
         uid = user.getUid(); //Current user's id needs to be turned to variable to it can match with specific node in Firebase Database
-        RegistrationList = new ArrayList<>();
+      //  RegistrationList = new ArrayList<>();
         entryDocRef = db.collection("Timetable").document(uid);
 
         //Following two lines are from Ref 4
@@ -117,8 +140,19 @@ public class ttRecyclerActivity extends AppCompatActivity {
         TextView dateView = (TextView) findViewById(R.id.current_date);
         dateView.setText(titleDate);
 
-        btnNext = findViewById(R.id.btnNextDay);
-        btnPrev = findViewById(R.id.btnLastDay);
+        btnNext = (ImageButton) findViewById(R.id.btnNextDay);
+        btnPrev = (ImageButton) findViewById(R.id.btnLastDay);
+        fab = findViewById(R.id.FABaddEntry);
+
+
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialogue();
+            }
+        });
 
 
 
@@ -184,6 +218,8 @@ public class ttRecyclerActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     //Reference 1
@@ -196,32 +232,6 @@ public class ttRecyclerActivity extends AppCompatActivity {
                 .orderBy("startTime", Query.Direction.ASCENDING);
 
 
-     /*   Query query = entryDocRef.collection("TT_Entries")
-                .whereEqualTo("Date", passDate)
-                .orderBy("startTime", Query.Direction.ASCENDING) */
-                ;
-
-
-    //    CollectRefForIndex = entryDocRef.collection("TT_Entries");
-
-    //    CollectRefForIndex = db.collection("Timetable_Entries");
-
-   /*     CollectRefForIndex.whereEqualTo("Date", passDate)
-        .orderBy("startTime", Query.Direction.ASCENDING)
-        .get().addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "Kanga");
-            }
-        }); */
-
-
-
-
-
-
-
-                ;
 
         FirestoreRecyclerOptions<Entry> options = new FirestoreRecyclerOptions.Builder<Entry>()
                 .setQuery(query, Entry.class)
@@ -261,6 +271,53 @@ public class ttRecyclerActivity extends AppCompatActivity {
     }
 
 
+
+
+    //ref 6
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                    MyApplication myapp = ((MyApplication) getApplicationContext());
+
+
+                    switch (item.getItemId()) {
+                        case R.id.NavAnnounceMenu:
+
+                            startActivity(new Intent(getApplicationContext(), AnnouncementFeedActivity.class));
+
+                            break;
+                        case R.id.NavCalendar:
+
+                            startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+
+                            break;
+
+                        case R.id.NavSettings:
+
+                           // Global Variables: https://stackoverflow.com/questions/1944656/android-global-variable
+                            switch (myapp.getGlobalUserType()) {
+                                case "A":
+                                    startActivity(new Intent(getApplicationContext(), StaffAdminActivity.class));
+                                    break;
+
+                                case "L":
+                                    startActivity(new Intent(getApplicationContext(), PersonalAdmin.class));
+                                    break;
+
+                                case "S":
+                                    startActivity(new Intent(getApplicationContext(), PersonalAdmin.class));
+                                    break;
+                            }
+
+                            break;
+                    }
+                    return true;
+                }
+            };
+
+
     public void doQuery(String build1, String path1){
         CollectionReference buildRef = db.collection("Building");
 
@@ -272,6 +329,7 @@ public class ttRecyclerActivity extends AppCompatActivity {
                     buildID = building.getPlaceID();
 
                     Intent intent = new Intent(ttRecyclerActivity.this, EntryActivity.class);
+                    Intent intent1 = new Intent(ttRecyclerActivity.this, CustomEventDialogue.class);
                     //    intent.putExtra("entryPath", path);
 
                     Bundle extras = new Bundle();
@@ -282,9 +340,20 @@ public class ttRecyclerActivity extends AppCompatActivity {
 
 
 
+
                 }
             }
         });
+
+    }
+
+
+    public void openDialogue(){
+
+             //Ref 7
+
+            CustomEventDialogue customEventDialogue = new CustomEventDialogue();
+            customEventDialogue.show(getSupportFragmentManager(), "dialogue");
 
     }
 

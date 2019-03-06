@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp">
 
     <TextView
         android:id="@+id/textView"
         android:textSize="30sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:focusable="false"/>
+    
+    <Button
+        android:id="@+id/delUser"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:text="X"
+        android:paddingBottom="4dp"
+        android:focusable="false"
+        android:clickable="false"/>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

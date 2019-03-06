@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,223 +8,270 @@
     tools:context=".EntryActivity"
     android:paddingLeft="2dp"
     android:paddingRight="2dp"
-    android:background="@color/whiteBack">
+    android:background="#ffffff">
 
 
-    <ViewFlipper
-        android:id="@+id/EntryFlip"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:inAnimation="@android:anim/slide_in_left"
-        android:outAnimation="@android:anim/slide_out_right">
+        android:layout_margin="10dp">
 
-        <LinearLayout
+
+
+        <ViewFlipper
+            android:id="@+id/EntryFlip"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
+            android:inAnimation="@android:anim/slide_in_left"
+            android:outAnimation="@android:anim/slide_out_right">
 
             <LinearLayout
-                android:id="@+id/ClickableEntryLayout"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@color/whiteBack"
-                android:orientation="vertical"
-                android:padding="40dp"
-                android:clickable="true">
-
-
-
-
-                <TextView
-                    android:id="@+id/entName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Hello World"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-                <TextView
-                    android:id="@+id/entType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Hello World"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-                <TextView
-                    android:id="@+id/entDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Hello World"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-                <TextView
-                    android:id="@+id/entTimes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Hello World"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-                <TextView
-                    android:id="@+id/entBuilding"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Hello World"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-
-
-
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
                 android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:background="@color/whiteBack"
-                >
+                android:orientation="vertical"
+                android:background="#ffffff">
 
 
                 <LinearLayout
+                    android:id="@+id/ClickableEntryLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/whiteBack"
+                    android:layout_height="300dp"
+                    android:background="#ffffff"
                     android:orientation="vertical"
-                    >
+                    android:padding="40dp"
+                    android:clickable="true">
+
+
+
 
                     <TextView
-                        android:id="@+id/entWeather"
+                        android:id="@+id/entName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="Weather Loading..."
+                        android:layout_weight="1"
+                        android:text="Hello World"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-                    <com.google.android.gms.maps.MapView
-
-                        android:id="@+id/entMap"
+                    <TextView
+                        android:id="@+id/entType"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="99"
+                        android:layout_weight="1"
+                        android:text="Meeting"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                    <TextView
+                        android:id="@+id/entDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Hello World"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                    <TextView
+                        android:id="@+id/entTimes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Hello World"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                    <TextView
+                        android:id="@+id/entBuilding"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Hello World"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:background="#ffffff"
+                    >
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/whiteBack"
+                        android:orientation="vertical"
                         >
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.1"
+                            android:orientation="horizontal">
 
-                    </com.google.android.gms.maps.MapView>
+                            <ImageView
+                                android:id="@+id/imgWeather"
+                                android:layout_width="wrap_content"
+                                android:layout_height="35dp"
+                                android:layout_weight="0.5"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginLeft="50dp"
+                                />
+                            <TextView
+                                android:id="@+id/entWeather"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:text="Weather Loading..."
+                                android:layout_marginLeft="20dp"
 
-                    <Button
-                        android:id="@+id/btnOpenMaps"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="Directions"/>
+                                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+
+                        </LinearLayout>
+
+
+
+
+
+                        <com.google.android.gms.maps.MapView
+
+                            android:id="@+id/entMap"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="99"
+                            android:layout_margin="10dp"
+                            >
+
+
+                        </com.google.android.gms.maps.MapView>
+
+                        <Button
+                            android:id="@+id/btnOpenMaps"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:text="Directions"
+                            android:layout_margin="3dp"
+                            android:background="#D6E5FF"
+                            android:textColor="#ffffff"
+                            />
+
+
+                    </LinearLayout>
+
+
+
+
+
+
 
 
                 </LinearLayout>
 
 
 
+            </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/editModuleName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Hello World"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <EditText
+                    android:id="@+id/editDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Hello World"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <EditText
+                    android:id="@+id/editStartTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Hello World"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <EditText
+                    android:id="@+id/editEndTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Hello World"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    />
+
+                <EditText
+                    android:id="@+id/editBuilding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <EditText
+                    android:id="@+id/editRoom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <Button
+                    android:id="@+id/btnPushUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Update Entry"
+                    />
 
 
 
 
             </LinearLayout>
 
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/editModuleName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Hello World"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <EditText
-                android:id="@+id/editDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Hello World"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <EditText
-                android:id="@+id/editStartTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Hello World"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <EditText
-                android:id="@+id/editEndTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Hello World"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                />
-
-            <EditText
-                android:id="@+id/editBuilding"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <EditText
-                android:id="@+id/editRoom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-            <Button
-                android:id="@+id/btnPushUpdate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Update Entry"
-                />
-
-
-
-
-        </LinearLayout>
-
-    </ViewFlipper>
+        </ViewFlipper>
 
 
 
 
 
 
-</LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

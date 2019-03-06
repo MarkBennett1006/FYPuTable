@@ -15,6 +15,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 /*
 Ref 2 Recycler View + FS : https://www.youtube.com/watch?v=lAGI6jGS4vs&list=PLrnPJCHvNZuAXdWxOzsN5rgG2M4uJ8bH1&index=3
+
+Explaination for all of the code for this adapter comes from the above video!
  */
 
 

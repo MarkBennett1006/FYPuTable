@@ -9,7 +9,9 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <!-- - MIGHT HAVE TO REMOVE THE NAME LINE JUST BELOW THIS COMMENT -->
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -51,10 +53,20 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
+        <service android:name=".Notifications">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity android:name=".CreateLectureActivity" />
         <activity android:name=".CreateModuleActivity" />
         <activity android:name=".StaffAdminActivity" />
-        <activity android:name=".CreateUserActivity"></activity>
+        <activity android:name=".CreateUserActivity" />
+        <activity android:name=".EditModuleActivity" />
+        <activity android:name=".AnnouncementFeedActivity" />
+        <activity android:name=".PublishAnnounce" />
+        <activity android:name=".PersonalAdmin"></activity>
     </application>
 
 </manifest>

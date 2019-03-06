@@ -95,6 +95,7 @@ public class CreateUserActivity extends AppCompatActivity {
         String strPassword = "password";
 
 
+
         //Ref 2
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String currentEmail = currentUser.getEmail();

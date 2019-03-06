@@ -1,16 +1,31 @@
 package com.example.mark.fyputable;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.timessquare.CalendarPickerView;
 
 import java.text.DateFormat;
@@ -18,12 +33,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.annotation.Nullable;
+
 public class CalendarActivity extends AppCompatActivity {
 
 
     /*
    Ref 1 CalendarPickerView https://codinginflow.com/tutorials/android/timesquare-calendarpickerview
    Ref 2 Java Parse Exception https://examples.javacodegeeks.com/core-java/text/parseexception/java-text-parseexception-how-to-solve-parseexception/
+   Ref 3 Timesquare Calendar Picker View https://www.youtube.com/watch?v=AN6UNJ-UC54&t=438s
+   Ref 4 Navigation Bar: https://www.youtube.com/watch?v=tPV8xA7m-iw
 
 
  --------Copy of Licence for the TimeSquare CalendarPickerView-------
@@ -47,6 +66,11 @@ limitations under the License.
     private static final String TAG = "CalendarActivity";
     CalendarPickerView calPicker;
     DateFormat dmy = new SimpleDateFormat("dd/MM/yyyy");
+    NotificationManagerCompat notificationManagerCompat;
+    String uid;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    BottomNavigationView bottomNavigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +78,17 @@ limitations under the License.
         setContentView(R.layout.activity_calendar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        notificationManagerCompat = NotificationManagerCompat.from(this);
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
+       //Ref 4
+        bottomNavigationView = findViewById(R.id.NavActivityCalendar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+      //  bottomNavigationView.setSelectedItemId(R.id.NavCalendar);
+
+
 
 
         Date firstDayOfSemester = new Date();
@@ -106,7 +141,53 @@ limitations under the License.
 
 
 
-
     }
+
+
+
+    //Ref 4
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                    MyApplication myapp = ((MyApplication) getApplicationContext());
+
+
+                    switch (item.getItemId()) {
+                        case R.id.NavCalendar:
+
+                            startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+
+                            break;
+
+                        case R.id.NavSettings:
+
+                           //Global Variables: https://stackoverflow.com/questions/1944656/android-global-variable
+                            switch (myapp.getGlobalUserType()) {
+                                case "A":
+                                    startActivity(new Intent(getApplicationContext(), StaffAdminActivity.class));
+                                    break;
+
+                                case "L":
+                                    startActivity(new Intent(getApplicationContext(), PersonalAdmin.class));
+                                    break;
+
+                                case "S":
+                                    startActivity(new Intent(getApplicationContext(), PersonalAdmin.class));
+                                    break;
+                            }
+                            break;
+
+                        case R.id.NavAnnounceMenu:
+
+                            startActivity(new Intent(getApplicationContext(), AnnouncementFeedActivity.class));
+
+                            break;
+                    }
+                    return true;
+                }
+            };
+
 
 }

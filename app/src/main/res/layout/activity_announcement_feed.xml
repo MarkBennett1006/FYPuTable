@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AnnouncementFeedActivity"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/announcement_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         />
+
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/NavAnnounceFeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/announcement_recycler"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff"
+
+        app:menu="@menu/bottom"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:src="@drawable/ic_add_circle_outline_black_24dp"
+        android:backgroundTint="#D6E5FF"
+        android:backgroundTintMode="src_in"
+        android:outlineSpotShadowColor="#D6E5FF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_above="@id/NavAnnounceFeed"
+        android:layout_alignParentRight="true"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+
+</RelativeLayout>

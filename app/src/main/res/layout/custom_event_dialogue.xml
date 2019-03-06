@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <Spinner
+        android:id="@+id/spCustomBuildings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"></Spinner>
+
+
+    <EditText
+        android:id="@+id/txtCustomRoom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="Room"/>
+
+    <EditText
+        android:id="@+id/txtCustomDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="Date"/>
+
+    <EditText
+        android:id="@+id/txtCustomStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="Start Time"/>
+
+    <EditText
+        android:id="@+id/txtCustomEnd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="End Time"/>
+
+    <ListView
+        android:id="@+id/lstCustomEmails"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        ></ListView>
+
+    <EditText
+        android:id="@+id/txtCustomEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:hint="User Email"/>
+
+    <Button
+        android:id="@+id/btnCustomAddEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add User Email to meeting"/>
+
+
+
+
+
+</LinearLayout>

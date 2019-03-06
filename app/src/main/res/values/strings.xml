@@ -3,4 +3,7 @@
     <string name="title_activity_annoncement__feed">Annoncement_Feed</string>
     <string name="title_activity_calendar">CalendarActivity</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_create_announcement">CreateAnnouncementActivity</string>
+    <string name="channel_name1">Test</string>
+    <string name="channel_description1">Test</string>
 </resources>

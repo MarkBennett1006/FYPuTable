@@ -7,7 +7,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
@@ -41,6 +44,17 @@ public class CreateModuleActivity extends AppCompatActivity {
     List<String> regStaffList;
     List<String> createRegStudentList;
     List<String> createRegStaffList;
+    int StaffIncrementer;
+    int StudentIncrementer;
+    List<String> lstSelectedStaff;
+    List<String> lstSelectedStudents;
+    ListView StaffView;
+    ListView StudentView;
+    ArrayAdapter<String> ViewStaffAdapter;
+    ArrayAdapter<String> ViewStudentAdapter;
+    Button btnDelete;
+
+
 
 
     @Override
@@ -55,14 +69,34 @@ public class CreateModuleActivity extends AppCompatActivity {
         spRegStaff = (Spinner) findViewById(R.id.spRegStaff);
         spRegStudents = (Spinner) findViewById(R.id.spRegStudents);
         btnCreateModule = (Button) findViewById(R.id.btnCreateModule);
+        StaffView = (ListView)findViewById(R.id.lstCreatModStaff);
+        StudentView = (ListView)findViewById(R.id.lstCreatModStudents);
+
 
         regStudentList = new ArrayList<>();
         regStaffList = new ArrayList<>();
         createRegStaffList = new ArrayList<>();
         createRegStudentList = new ArrayList<>();
+        lstSelectedStaff  = new ArrayList<>();
+        lstSelectedStudents = new ArrayList<>();
 
+         StaffIncrementer = 0;
+         StudentIncrementer = 0;
+
+        //Ref2
         ArrayAdapter<String> adapterStaff = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, regStaffList);
         ArrayAdapter<String> adapterStudent = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, regStudentList);
+
+        ViewStaffAdapter = new ArrayAdapter<>(CreateModuleActivity.this, R.layout.messageinfo, R.id.textView, lstSelectedStaff);
+        ViewStudentAdapter = new ArrayAdapter<>(CreateModuleActivity.this, R.layout.messageinfo, R.id.textView, lstSelectedStudents);
+        StaffView.setAdapter(ViewStaffAdapter);
+        StudentView.setAdapter(ViewStudentAdapter);
+
+
+
+
+
+
 
         db.collection("Users").whereEqualTo("userType", "L")
                 .get()
@@ -78,6 +112,7 @@ public class CreateModuleActivity extends AppCompatActivity {
                         }
 
                         spRegStaff.setAdapter(adapterStaff);
+
 
                     }
                 });
@@ -103,6 +138,10 @@ public class CreateModuleActivity extends AppCompatActivity {
 
 
 
+
+
+
+
         btnCreateModule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,10 +153,18 @@ public class CreateModuleActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                if (StaffIncrementer != 0){
 
-                String strStaffCode = spRegStaff.getItemAtPosition(position).toString();
-              //  createRegStaffList.add(strStaffCode);
-                getUserID(strStaffCode);
+                    String strStaffCode = spRegStaff.getItemAtPosition(position).toString();
+                    lstSelectedStaff.add(strStaffCode);
+                    getUserID(strStaffCode);
+                    ViewStaffAdapter.notifyDataSetChanged();
+
+                }
+
+                else {
+                    StaffIncrementer += 1;
+                }
 
 
 
@@ -133,9 +180,18 @@ public class CreateModuleActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                String strStudentCode = spRegStudents.getItemAtPosition(position).toString();
-               // createRegStudentList.add(strStudentCode);
-                getUserID(strStudentCode);
+                if (StudentIncrementer != 0) {
+                    String strStudentCode = spRegStudents.getItemAtPosition(position).toString();
+                    lstSelectedStudents.add(strStudentCode);
+                    getUserID(strStudentCode);
+                    ViewStudentAdapter.notifyDataSetChanged();
+                }
+
+                else {
+                    StudentIncrementer += 1;
+                }
+
+
             }
 
             @Override
@@ -145,11 +201,82 @@ public class CreateModuleActivity extends AppCompatActivity {
         });
 
 
+        StaffView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                btnDelete = (Button) view.findViewById(R.id.delUser);
+                btnDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+                String removedUser = lstSelectedStaff.get(position);
+                lstSelectedStaff.remove(position);
+                ViewStaffAdapter.notifyDataSetChanged();
+                Toast.makeText(CreateModuleActivity.this, removedUser + " removed.", Toast.LENGTH_SHORT).show();
+
+
+            }
+        });
+
+        StudentView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                String removedUser = lstSelectedStudents.get(position);
+                lstSelectedStudents.remove(position);
+                ViewStudentAdapter.notifyDataSetChanged();
+                Toast.makeText(CreateModuleActivity.this, removedUser + " removed.", Toast.LENGTH_SHORT).show();
+            }
+        });
+     /*   StaffView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                btnDelete = (Button) view.findViewById(R.id.delUser);
+                btnDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        lstSelectedStaff.remove(position);
+                        ViewStaffAdapter.notifyDataSetChanged();
+                        Toast.makeText(CreateModuleActivity.this, "Worked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                Toast.makeText(CreateModuleActivity.this, "Click", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        }); */
+
+
+
+
+
 
 
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void getUserID(String code){
 
@@ -173,6 +300,9 @@ public class CreateModuleActivity extends AppCompatActivity {
 
                     }
                 });
+
+
+
     }
 
 

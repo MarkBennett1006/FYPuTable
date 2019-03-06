@@ -34,17 +34,25 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
 
 import io.opencensus.tags.Tag;
 
 
 // Reference 1: https://www.youtube.com/watch?v=tJVBXCNtUuk
 //Reference 2: https://google-developer-training.gitbooks.io/android-developer-advanced-course-practicals/content/unit-4-add-geo-features-to-your-apps/lesson-8-places/8-1-p-places-api/8-1-p-places-api.html
+// Reference 3: Global Variables: https://stackoverflow.com/questions/1944656/android-global-variable
 
 
 
@@ -61,14 +69,21 @@ public class MainActivity extends AppCompatActivity {
     Button Login;  //Login button
     FirebaseAuth firebaseAuth; //Need to declare Firebase Auth
     String TAG;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    CollectionReference ref;
+    String temp;
+    String tempEmail;
 
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ref = db.collection("Users");
 
         txtEmail = (EditText) findViewById(R.id.txtName); // Assign UI elements to their XML specification in activity_main.xml
         txtPass = (EditText) findViewById(R.id.txtPass);
@@ -83,8 +98,6 @@ public class MainActivity extends AppCompatActivity {
         }); //Call the method to be executed when Login button is clicked.
 
         TAG = MainActivity.class.getSimpleName();
-
-
 
 
         //Reference 2
@@ -113,16 +126,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -130,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
 
         String emailText = txtEmail.getText().toString(); //Convert what user has entered in email and password textboxes to Strings
         String passText= txtPass.getText().toString();
+        temp = passText;
+        tempEmail = emailText;
 
 
         if (TextUtils.isEmpty(emailText)  || TextUtils.isEmpty(passText)){
@@ -142,30 +147,43 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-
-
                         if(task.isSuccessful()){
-
-
-
-                          //  startActivity(new Intent(getApplicationContext(), Main2Activity.class));
-                          //  startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
-                          //  startActivity(new Intent(getApplicationContext(), CreateModuleActivity.class));
-                            startActivity(new Intent(getApplicationContext(), StaffAdminActivity.class));
-
+                          FirebaseAuth auth = FirebaseAuth.getInstance();
+                            FirebaseUser user = auth.getCurrentUser();
+                            String uid = user.getUid();
+                            ContinueOpen(uid);
                         }
-
 
                         else {
                             Toast.makeText(getApplicationContext(),"Incorrect Login Details!",Toast.LENGTH_LONG).show();
                         }
-
                     }
                 }); }
+    }
 
 
+    public void ContinueOpen(String uid1){
 
+        ref.whereEqualTo("userID", uid1).get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (DocumentSnapshot snap: queryDocumentSnapshots){
 
+                            Users user = snap.toObject(Users.class);
+                            //Ref 3
+                            MyApplication myapp = ((MyApplication)getApplicationContext());
+                            myapp.setGlobalUID(uid1);
+                            myapp.setGlobalUserType(user.getUserType());
+                            myapp.setGlobalUserName(user.getUserName());
+                            myapp.setGlobalTemp(temp);
+                            myapp.setGlobalTempEmail(tempEmail);
+                            myapp.notifSetup();
+                        }
+                       //startActivity(new Intent(getApplicationContext(), AnnouncementFeedActivity.class));
+                            startActivity(new Intent(getApplicationContext(), CalendarActivity.class));
+                      }
+                });
 
 
     }

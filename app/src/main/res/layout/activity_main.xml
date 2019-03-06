@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/whiteBack">
+    android:background="#ffffff">
 
 
     <EditText
@@ -43,7 +43,7 @@
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="128dp"
-        android:layout_height="74dp"
+        android:layout_height="50dp"
         android:layout_marginStart="141dp"
         android:layout_marginTop="21dp"
         android:layout_marginEnd="155dp"
@@ -53,7 +53,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.325"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPass" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPass"
+        android:background="#D6E5FF"
+        android:textColor="#ffffff"
+        android:textSize="25dp"
+        />
 
     <TextView
         android:id="@+id/textView2"

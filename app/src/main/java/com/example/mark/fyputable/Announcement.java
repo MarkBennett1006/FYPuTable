@@ -10,11 +10,13 @@ public class Announcement {
     private String authName;
     private String authID;
 
+    private String userID;
+
     public Announcement() {
 
     }
 
-    public Announcement(String title, String announcementID, String moduleCode, String msgContent, String date, String authName, String authID) {
+    public Announcement(String title, String announcementID, String moduleCode, String msgContent, String date, String authName, String authID, String userID) {
         Title = title;
         this.announcementID = announcementID;
         this.moduleCode = moduleCode;
@@ -22,6 +24,7 @@ public class Announcement {
         Date = date;
         this.authName = authName;
         this.authID = authID;
+        this.userID = userID;
     }
 
     public String getTitle() {
@@ -78,5 +81,13 @@ public class Announcement {
 
     public void setAuthID(String authID) {
         this.authID = authID;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 }

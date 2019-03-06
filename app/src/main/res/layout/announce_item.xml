@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/announceCard"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    app:cardBackgroundColor="#FFFFE8"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/text_view_announcetitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Information Systems Analysis"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+
+        <TextView
+            android:id="@+id/text_view_content"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/text_view_timestamp"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+
+            />
+
+        <TextView
+            android:id="@+id/text_view_timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/text_view_announcetitle"
+            android:text="Ends at 11:00" />
+
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

@@ -19,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -186,6 +187,7 @@ public class CreateLectureActivity extends AppCompatActivity {
                         String strUserID = createStudentID.getText().toString();
 
 
+
                         //Ref 1
                         Map<String, Object> entry = new HashMap<>();
                         entry.put("Building",strBuilding);
@@ -219,6 +221,7 @@ public class CreateLectureActivity extends AppCompatActivity {
                     }
 
                     Toast.makeText(CreateLectureActivity.this, "Success", Toast.LENGTH_SHORT).show();
+
 
 
                 }
