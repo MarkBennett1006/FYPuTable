@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".EntryActivity"
+    tools:context=".Activities.EntryActivity"
     android:paddingLeft="2dp"
     android:paddingRight="2dp"
     android:background="#ffffff">
@@ -249,6 +249,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Update Entry"
+                    android:background="#D6E5FF"
+                    android:textColor="#ffffff"
                     />
 
 

@@ -18,21 +18,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Main2Activity" />
         <activity android:name=".Main3Activity" />
         <activity
-            android:name=".CalendarActivity"
+            android:name=".Activities.CalendarActivity"
             android:label="@string/title_activity_calendar"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ttRecyclerActivity" />
-        <activity android:name=".EntryActivity" />
+        <activity android:name=".Activities.ttRecyclerActivity" />
+        <activity android:name=".Activities.EntryActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -53,20 +52,20 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <service android:name=".Notifications">
+        <service android:name=".Services.Notifications">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name=".CreateLectureActivity" />
-        <activity android:name=".CreateModuleActivity" />
-        <activity android:name=".StaffAdminActivity" />
-        <activity android:name=".CreateUserActivity" />
+        <activity android:name=".Activities.CreateLectureActivity" />
+        <activity android:name=".Activities.CreateModuleActivity" />
+        <activity android:name=".Activities.StaffAdminActivity" />
+        <activity android:name=".Activities.CreateUserActivity" />
         <activity android:name=".EditModuleActivity" />
-        <activity android:name=".AnnouncementFeedActivity" />
-        <activity android:name=".PublishAnnounce" />
-        <activity android:name=".PersonalAdmin"></activity>
+        <activity android:name=".Activities.AnnouncementFeedActivity" />
+        <activity android:name=".Activities.PublishAnnounce" />
+        <activity android:name=".Activities.PersonalAdmin"></activity>
     </application>
 
 </manifest>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateUserActivity"
+    tools:context=".Activities.CreateUserActivity"
     android:orientation="vertical">
 
     <EditText
@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:hint="User Type (A, L or S)"/>
 
     <EditText
         android:id="@+id/crUserName"
@@ -22,7 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:hint="User Name"/>
 
     <EditText
         android:id="@+id/crEmail"
@@ -30,7 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:hint="Email Address"/>
 
     <EditText
         android:id="@+id/crInstitutionID"
@@ -38,13 +40,17 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:hint="Institution Number"/>
 
     <Button
         android:id="@+id/btnCreateUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
-        android:text="Create User"/>
+        android:text="Create User"
+        android:background="#D6E5FF"
+        android:textColor="#ffffff"
+        android:layout_margin="10dp"/>
 
 </LinearLayout>

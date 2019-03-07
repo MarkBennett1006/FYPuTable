@@ -1,4 +1,4 @@
- package com.example.mark.fyputable;
+ package com.example.mark.fyputable.Services;
 
  import android.content.Context;
 import android.view.GestureDetector;

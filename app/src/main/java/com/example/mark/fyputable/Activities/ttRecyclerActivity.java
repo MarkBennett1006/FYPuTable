@@ -1,4 +1,4 @@
-package com.example.mark.fyputable;
+package com.example.mark.fyputable.Activities;
 
 
 import android.content.Intent;
@@ -8,42 +8,36 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.support.v4.app.FragmentActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
+import com.example.mark.fyputable.Services.CustomEventDialogue;
+import com.example.mark.fyputable.MyApplication;
+import com.example.mark.fyputable.Objects.Building;
+import com.example.mark.fyputable.Objects.Entry;
+import com.example.mark.fyputable.Services.OnSwipeTouchListener;
+import com.example.mark.fyputable.R;
+import com.example.mark.fyputable.Services.entryAdapter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
- import com.example.mark.fyputable.OnSwipeTouchListener;
 
-import java.lang.ref.Reference;
-import java.sql.Ref;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 
 /*
@@ -61,15 +55,13 @@ Ref 7: Custom Dialogue: https://www.youtube.com/watch?v=ARezg1D9Zd0&list=PLrnPJC
 public class ttRecyclerActivity extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-   // CollectionReference moduleRegRef = db.collection("ModuleReg");
-   // CollectionReference entryRef = db.collection("TT_Entry");
+
 
 
     DocumentReference entryDocRef;
     entryAdapter adapter;
     FirebaseUser user;
     String uid;
-  //  List<ModuleReg> RegistrationList;
     DateFormat dmy = new SimpleDateFormat("dd/MM/yyyy");
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
     SimpleDateFormat activityTitleDate = new SimpleDateFormat("EEE, MMM d");
@@ -111,11 +103,6 @@ public class ttRecyclerActivity extends AppCompatActivity {
 
         navbar.setOnNavigationItemSelectedListener(navListener);
      //   navbar.setSelectedItemId(R.id.NavCalendar);
-
-
-
-
-
 
 
         user = FirebaseAuth.getInstance().getCurrentUser(); //Find the current user

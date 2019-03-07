@@ -1,12 +1,8 @@
-package com.example.mark.fyputable;
+package com.example.mark.fyputable.Services;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.constraint.solver.widgets.Snapshot;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
@@ -16,28 +12,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
+import com.example.mark.fyputable.Objects.Building;
+import com.example.mark.fyputable.Objects.Users;
+import com.example.mark.fyputable.R;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.core.Query;
 
-import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 
 // ref 1: Custom Dialogue: https://www.youtube.com/watch?v=ARezg1D9Zd0&list=PLrnPJCHvNZuBkhcesO6DfdCghl6ZejVPc&index=5
@@ -75,15 +65,12 @@ public class CustomEventDialogue extends AppCompatDialogFragment {
         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
             }
         })
         .setPositiveButton("Create", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
                 createEntry();
-
             }
         });
 
@@ -114,9 +101,7 @@ public class CustomEventDialogue extends AppCompatDialogFragment {
                     String currentBuilding = building.getBuildingName();
                     lstBuildings.add(currentBuilding);
                 }
-
                 spBuildings.setAdapter(adapter);
-
             }
         });
 
@@ -137,55 +122,28 @@ public class CustomEventDialogue extends AppCompatDialogFragment {
                         for(DocumentSnapshot snap : queryDocumentSnapshots){
                             Users user = snap.toObject(Users.class);
                             UIDList.add(user.getUserID());
-                            String string = "string";
                         }
 
                     }
                 });
 
-
-
-
             }
         });
-
-
-
-
-
-
-
-
-
-
-
 
         return builder.create();
     }
 
 
-
-
-
-
-
     public void createEntry() {
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-
         UIDList.add(uid);
-
         HashSet<String> hashSet = new HashSet<String>();
         hashSet.addAll(UIDList);
         UIDList.clear();
         UIDList.addAll(hashSet);
 
-
-
         for (int i = 0; i < UIDList.size(); i++) {
-
-            String string = "String";
 
             String ModuleCode = "Custom Meeting";
             String Type = "C";
@@ -212,14 +170,12 @@ public class CustomEventDialogue extends AppCompatDialogFragment {
             map.put("startTime", Start);
             map.put("userID", UIDList.get(i));
 
-
             db.collection("Timetable_Entries").document().set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                 }
             });
         }
-
     }
 
 

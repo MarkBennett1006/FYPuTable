@@ -1,4 +1,4 @@
-package com.example.mark.fyputable;
+package com.example.mark.fyputable.Activities;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -11,15 +11,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.mark.fyputable.Objects.Modules;
+import com.example.mark.fyputable.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.messaging.FirebaseMessagingService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,10 +32,6 @@ import java.util.Map;
 Reference 1: Writing to Firestore: https://www.youtube.com/watch?v=di5qmolrFVs&list=PLrnPJCHvNZuDrSqu-dKdDi3Q6nM-VUyxD&index=3
 Reference 2: Spinner: https://stackoverflow.com/questions/13377361/how-to-create-a-drop-down-list
 Reference 3: Spinner On Selected Item: https://stackoverflow.com/questions/1337424/android-spinner-get-the-selected-item-change-event
-
-
-
-
 
  */
 
@@ -59,9 +55,7 @@ public class CreateLectureActivity extends AppCompatActivity {
     Spinner moduleCodeDrop;
     String pageLoadName;
     String currentModule;
-
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
 
 
     @Override
@@ -71,8 +65,6 @@ public class CreateLectureActivity extends AppCompatActivity {
 
         createID = (EditText)findViewById(R.id.crID);
         createID.setHint("LectureID");
-    //    createStudentID = (EditText)findViewById(R.id.crStudentID);
-     //   createStudentID.setHint("StudentID");
         createStart = (EditText)findViewById(R.id.crStart);
         createStart.setHint("Start Time");
         createEnd = (EditText)findViewById(R.id.crEnd);
@@ -81,9 +73,7 @@ public class CreateLectureActivity extends AppCompatActivity {
         createDate.setHint("Date");
         createType = (EditText)findViewById(R.id.crType);
         createType.setHint("Type");
-
         createModName = (EditText)findViewById(R.id.crModuleName);
-
         createBuilding = (EditText)findViewById(R.id.crBuilding);
         createBuilding.setHint("Building");
         createRoom = (EditText)findViewById(R.id.crRoom);
@@ -93,11 +83,8 @@ public class CreateLectureActivity extends AppCompatActivity {
 
 
         ModuleList = new ArrayList<>();
-
         //Ref1
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, ModuleList);
-
-
 
 
         btnCreate.setOnClickListener(new View.OnClickListener() {
@@ -115,18 +102,11 @@ public class CreateLectureActivity extends AppCompatActivity {
                 for (QueryDocumentSnapshot documentSnapshot1 : queryDocumentSnapshots){
 
                     Modules mod = documentSnapshot1.toObject(Modules.class);
-
                     String code = mod.getModuleCode();
                     pageLoadName = mod.getModuleName();
                     createModName.setText(pageLoadName);
-
                     ModuleList.add(code);
-
-
-
-
                 }
-
                 moduleCodeDrop.setAdapter(adapter);
 
             }
@@ -146,9 +126,7 @@ public class CreateLectureActivity extends AppCompatActivity {
                           Modules mod = snap.toObject(Modules.class);
 
                           createModName.setText(mod.getModuleName());
-                      }
-                  }
-              });
+                      } }});
 
           }
 
@@ -172,9 +150,6 @@ public class CreateLectureActivity extends AppCompatActivity {
                     Modules mod1 = snap.toObject(Modules.class);
 
                     for (int i = 0; i < mod1.getRegisteredStudents().size(); i++) {
-
-
-
                         String strBuilding = createBuilding.getText().toString();
                         String strDate = createDate.getText().toString();
                         String strRoom = createRoom.getText().toString();
@@ -184,9 +159,7 @@ public class CreateLectureActivity extends AppCompatActivity {
                         String strModCode = moduleCodeDrop.getSelectedItem().toString();
                         String strName = createModName.getText().toString();
                         String strStart = createStart.getText().toString();
-                        String strUserID = createStudentID.getText().toString();
-
-
+//                        String strUserID = createStudentID.getText().toString();
 
                         //Ref 1
                         Map<String, Object> entry = new HashMap<>();
@@ -214,28 +187,10 @@ public class CreateLectureActivity extends AppCompatActivity {
 
                             }
                         });
-
-
-
-
                     }
 
                     Toast.makeText(CreateLectureActivity.this, "Success", Toast.LENGTH_SHORT).show();
-
-
-
-                }
-
-
-            }
-        });
-
-
-
-
+                }}});
     }
-
-
-
 
 }

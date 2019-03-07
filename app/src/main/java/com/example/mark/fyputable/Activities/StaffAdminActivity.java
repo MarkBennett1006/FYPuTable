@@ -1,4 +1,4 @@
-package com.example.mark.fyputable;
+package com.example.mark.fyputable.Activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+
+import com.example.mark.fyputable.MyApplication;
+import com.example.mark.fyputable.R;
 
 /*
 ref 1: Navigation Bar: https://www.youtube.com/watch?v=tPV8xA7m-iw

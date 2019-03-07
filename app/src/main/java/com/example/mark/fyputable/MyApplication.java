@@ -7,8 +7,9 @@ import android.app.NotificationManager;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
-import android.util.Log;
 
+import com.example.mark.fyputable.Objects.Announcement;
+import com.example.mark.fyputable.Objects.Entry;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -17,9 +18,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 
 
+/* Ref 1: Global Variables: https://stackoverflow.com/questions/1944656/android-global-variable
+   Ref 2 Create Notifications: https://www.youtube.com/watch?v=tTbd1Mfi-Sk
+   Ref 3 SnapshotListener to listen for datachanges: https://firebase.google.com/docs/firestore/query-data/listen*/
 
-//Ref 1: Global Variables: https://stackoverflow.com/questions/1944656/android-global-variable
-// Ref 2 Create Notifications: https://www.youtube.com/watch?v=tTbd1Mfi-Sk
+//This class extends the base Application class. Allows me to have global variables,
 
 import java.util.List;
 
@@ -55,6 +58,7 @@ public class MyApplication extends Application {
     }
 
 
+    //REF 3 for firestore documentchange stuff
     public void notifSetup(){
 
             db.collection("Timetable_Entries").whereEqualTo("userID", globalUID).addSnapshotListener(new EventListener<QuerySnapshot>() {

@@ -1,12 +1,10 @@
-package com.example.mark.fyputable;
+package com.example.mark.fyputable.Activities;
 
-import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +21,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mark.fyputable.MyApplication;
+import com.example.mark.fyputable.Objects.Building;
+import com.example.mark.fyputable.Objects.Entry;
+import com.example.mark.fyputable.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.GeoDataClient;

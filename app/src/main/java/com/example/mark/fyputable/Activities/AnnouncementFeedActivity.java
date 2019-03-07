@@ -1,41 +1,33 @@
-package com.example.mark.fyputable;
+package com.example.mark.fyputable.Activities;
 
-import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.mark.fyputable.Services.AnnouncementAdapter;
+import com.example.mark.fyputable.Services.AnnouncementDialogue;
+import com.example.mark.fyputable.MyApplication;
+import com.example.mark.fyputable.Objects.Announcement;
+import com.example.mark.fyputable.Objects.Users;
+import com.example.mark.fyputable.R;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import javax.annotation.Nullable;
 
 
 /*
@@ -61,23 +53,15 @@ public class AnnouncementFeedActivity extends AppCompatActivity {
     NotificationManagerCompat notificationManagerCompat;
     BottomNavigationView navbar;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_announcement_feed);
 
         notificationManagerCompat = NotificationManagerCompat.from(this);
-
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
         navbar = findViewById(R.id.NavAnnounceFeed);
-
         navbar.setOnNavigationItemSelectedListener(navListener);
-
-
-
-
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,11 +71,8 @@ public class AnnouncementFeedActivity extends AppCompatActivity {
         });
 
         db = FirebaseFirestore.getInstance();
-
         feedRef= db.collection("Announcement");
-
         user = FirebaseAuth.getInstance().getCurrentUser();
-
         uid = user.getUid();
 
 
@@ -109,16 +90,8 @@ public class AnnouncementFeedActivity extends AppCompatActivity {
                   if (type.equals("L")){
                     }
 
-                }
-
-            }
-        });
-
-
-
+                } }});
         setUpRecycler();
-
-
     }
 
 
@@ -142,21 +115,14 @@ public class AnnouncementFeedActivity extends AppCompatActivity {
             public void onAnnounceClick(DocumentSnapshot docSnap, int position) {
                 String path = docSnap.getReference().getPath();
 
-
                 //Ref 4 + 5
                 AnnouncementDialogue dialogue = new AnnouncementDialogue();
                 Bundle args = new Bundle();
                 args.putString("announcepath", path);
                 dialogue.setArguments(args);
                 dialogue.show(getSupportFragmentManager(), "dialogue");
-
-
-             ;
-
-            }
-        });
-
-    }
+            }});
+        }
 
 
     //Ref 3 (Whole Method)
@@ -164,11 +130,8 @@ public class AnnouncementFeedActivity extends AppCompatActivity {
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                     MyApplication myapp = ((MyApplication) getApplicationContext());
-
                     int itemid = item.getItemId();
-
 
                     switch (item.getItemId()) {
                         case R.id.NavAnnounceMenu:

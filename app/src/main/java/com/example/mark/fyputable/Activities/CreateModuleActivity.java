@@ -1,4 +1,4 @@
-package com.example.mark.fyputable;
+package com.example.mark.fyputable.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,15 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mark.fyputable.Objects.Users;
+import com.example.mark.fyputable.R;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -123,15 +122,11 @@ public class CreateModuleActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         for (QueryDocumentSnapshot documentSnapshotStaff : queryDocumentSnapshots) {
-
                             Users student = documentSnapshotStaff.toObject(Users.class);
-
                             String studentID = student.getInstitutionID();
                             regStudentList.add(studentID);
                         }
-
                         spRegStudents.setAdapter(adapterStudent);
-
                     }
                 });
 
@@ -232,50 +227,7 @@ public class CreateModuleActivity extends AppCompatActivity {
                 Toast.makeText(CreateModuleActivity.this, removedUser + " removed.", Toast.LENGTH_SHORT).show();
             }
         });
-     /*   StaffView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                btnDelete = (Button) view.findViewById(R.id.delUser);
-                btnDelete.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        lstSelectedStaff.remove(position);
-                        ViewStaffAdapter.notifyDataSetChanged();
-                        Toast.makeText(CreateModuleActivity.this, "Worked", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                Toast.makeText(CreateModuleActivity.this, "Click", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        }); */
-
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public void getUserID(String code){
@@ -300,9 +252,6 @@ public class CreateModuleActivity extends AppCompatActivity {
 
                     }
                 });
-
-
-
     }
 
 

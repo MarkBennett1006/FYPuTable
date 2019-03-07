@@ -1,13 +1,14 @@
-package com.example.mark.fyputable;
+package com.example.mark.fyputable.Activities;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mark.fyputable.MyApplication;
+import com.example.mark.fyputable.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -58,7 +59,7 @@ public class PersonalAdmin extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
 
-                                        Toast.makeText(PersonalAdmin.this, "Success!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(PersonalAdmin.this, "Password Change Email sent, check your inbox.", Toast.LENGTH_SHORT).show();
 
                                     }
                                 });

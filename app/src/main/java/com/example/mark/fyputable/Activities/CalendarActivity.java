@@ -1,39 +1,24 @@
-package com.example.mark.fyputable;
+package com.example.mark.fyputable.Activities;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.CalendarView;
-import android.widget.Toast;
 
+import com.example.mark.fyputable.MyApplication;
+import com.example.mark.fyputable.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.timessquare.CalendarPickerView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
-import javax.annotation.Nullable;
 
 public class CalendarActivity extends AppCompatActivity {
 
@@ -86,9 +71,6 @@ limitations under the License.
        //Ref 4
         bottomNavigationView = findViewById(R.id.NavActivityCalendar);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
-      //  bottomNavigationView.setSelectedItemId(R.id.NavCalendar);
-
-
 
 
         Date firstDayOfSemester = new Date();
@@ -124,23 +106,13 @@ limitations under the License.
 
                Intent intent = new Intent(CalendarActivity.this, ttRecyclerActivity.class);
                 intent.putExtra("dateExtra", selectedDate);
-
-
                 startActivity(intent);
-
             }
 
             @Override
             public void onDateUnselected(Date date) {
 
-            }
-        });
-
-
-
-
-
-
+            }});
     }
 
 
@@ -152,7 +124,6 @@ limitations under the License.
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                     MyApplication myapp = ((MyApplication) getApplicationContext());
-
 
                     switch (item.getItemId()) {
                         case R.id.NavCalendar:

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateModuleActivity"
+    tools:context=".Activities.CreateModuleActivity"
     android:orientation="vertical">
 
 
@@ -16,7 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:hint="Module Code"/>
 
     <EditText
         android:id="@+id/crNewModuleName"
@@ -24,7 +25,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:hint="Module Name"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="Add Staff"
+        android:textAlignment="center"/>
 
     <ListView
         android:id="@+id/lstCreatModStaff"
@@ -45,6 +53,13 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:spinnerMode="dropdown"/>
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:text="Add Students"
+        android:textAlignment="center"/>
+
     <ListView
         android:id="@+id/lstCreatModStudents"
         android:layout_width="match_parent"
@@ -52,6 +67,7 @@
         android:layout_weight="1">
 
     </ListView>
+
 
     <Spinner
         android:id="@+id/spRegStudents"
@@ -62,12 +78,17 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:spinnerMode="dropdown"/>
 
+
+
     <Button
         android:id="@+id/btnCreateModule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
-        android:text="Create Lecture"/>
+        android:text="Create Lecture"
+        android:background="#D6E5FF"
+        android:textColor="#ffffff"
+        android:layout_margin="10dp"/>
 
 
 
